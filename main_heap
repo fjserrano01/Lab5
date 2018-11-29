@@ -1,0 +1,155 @@
+class Heap:
+    def __init__(self):
+        self.heap_array=[]
+
+    def print(self):
+        for i in range(len(self.heap_array)):
+            print(self.heap_array[i], end=",")
+        print('\n')
+
+    def insert(self, value):
+        self.heap_array.append(value)#appends value
+
+        i=-1
+        for item in self.heap_array:#looks for the last index
+            i+=1
+        while i!=0 and self.heap_array[i//2]>value:#as long as the number we are inserting is not bigger than its father we keep switching its spot
+            temp=self.heap_array[i//2]
+            self.heap_array[i//2]=value
+            self.heap_array[i]=temp
+            i=i//2
+
+    def extract_min(self):
+        if self.is_empty():
+            return None
+
+        if self.heap_array[0]==self.heap_array[-1]:
+            return self.heap_array[0]
+
+
+
+        minimum = self.heap_array[0]
+        # print('\nminimum is ',minimum)
+        self.heap_array[0]=self.heap_array.pop(-1)#gets rid of last spot decreasing the the heap size
+
+
+        #print('head is ', head)
+        i=0
+
+        while ((i*2) + 2) <len(self.heap_array):
+            left_child = (2 * i) + 1
+            right_child = (2 * i) + 2
+            #print('cycle')
+            # for k in range(len(self.heap_array)):
+            #     print(self.heap_array[k], end=",")
+            # print('\n')
+
+            if self.heap_array[left_child]<self.heap_array[right_child] and self.heap_array[i] > self.heap_array[left_child]:#if the left is less than the right child switch the head with the left child
+               # print('TRUE')
+                #print(self.heap_array[(i*2)+1],'is about to switch with head ')
+                temp=self.heap_array[left_child]
+               # print('temp is now ',temp)
+                self.heap_array[left_child]=self.heap_array[i]
+               # print('left child is now', self.heap_array[(i*2)+1])
+                self.heap_array[i]=temp
+                # print((i*2)+1)
+                # print('i is ',i)
+                i=left_child
+
+               # print('self.heap array of left child is now',self.heap_array[(i*2)+1],' and head is now ',head)
+               # print('new array is now')
+               #  for t in range(len(self.heap_array)):
+               #     print(self.heap_array[t], end=",")
+               #
+               #  print('hi')
+
+
+
+            elif  self.heap_array[left_child] > self.heap_array[right_child] and self.heap_array[i]>self.heap_array[right_child] and self.heap_array[right_child] <self.heap_array[left_child]:#if the right chilld is bigger than the left switch it with the head
+                #print('TRUE ASWELL')
+                #print(self.heap_array[(i*2)+2], 'is about to switch with head ', head)
+                temp = self.heap_array[right_child]
+                #print('temp is now ', temp)
+                self.heap_array[right_child] = self.heap_array[i]
+                #print(self.heap_array[(i*2)+2], 'now is left child')
+                self.heap_array[i] = temp
+                # print('head is now ', self.heap_array[i])
+                # print('self.heap array of left child is now', self.heap_array[(i*2)+1], ' and head is now ', head)
+                # print('new array is now')
+                # for t in range(len(self.heap_array)):
+                #     print(self.heap_array[t], end=",")
+                #
+                # print('hi')
+                # print((i*2)+2)
+                # print(i)
+                i=right_child
+        return minimum
+
+
+
+
+    def is_empty(self):
+        return len(self.heap_array)==0
+
+    def add(self,value):#will allow me to append heaps outside the class
+        self.heap_array.append(value)
+
+
+
+
+
+    def heap_sort(self):#method to simplify heapsorting by returning the min
+        min=self.extract_min()
+        #print('min is ',min)
+        return min
+
+
+
+
+
+
+
+
+newHeap=Heap()
+sortedHeap=Heap()
+#Hardcode testing
+
+
+# newHeap.insert(2)
+# newHeap.insert(0)
+# newHeap.insert(1)
+# newHeap.insert(12)
+# newHeap.insert(10)
+# newHeap.insert(90)
+# newHeap.insert(21)
+# newHeap.insert(128)
+# newHeap.insert(34)
+# newHeap.print()
+#
+#
+# for i in range(9):
+#     min=newHeap.heap_sort()
+#     sortedHeap.add(min)
+#
+# sortedHeap.print()
+
+file1=''
+file1=input('Enter file name followed by .txt\n')
+
+with open(file1, 'r') as file:#reads file and inserts numbers into heap
+    for line in file:
+        element_for_heap= line.split(',')
+        #print(element_for_heap)
+        element_for_heap.pop(-1)
+        #print(element_for_heap)
+    for i in  range(len(element_for_heap)):
+        newHeap.insert(int(element_for_heap[i]))
+
+    print('The origianl heap is ')
+    newHeap.print()
+
+    for i in range(len(element_for_heap)):#This will sort the heap
+        min = newHeap.heap_sort()
+        sortedHeap.add(min)
+    print('The sorted heap is ')
+    sortedHeap.print()
