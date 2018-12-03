@@ -40,12 +40,16 @@ class Heap:
             left_child = (2 * i) + 1
             right_child = (2 * i) + 2
             #print('cycle')
-            # for k in range(len(self.heap_array)):
-            #     print(self.heap_array[k], end=",")
-            # print('\n')
+            for k in range(len(self.heap_array)):
+                print(self.heap_array[k], end=",")
+            print('\n')
+
+            print('left child is ',self.heap_array[left_child],' right child is ',self.heap_array[right_child])
+
+            print('\n child at i is ',self.heap_array[i], ' and i is ',i)
 
             if self.heap_array[left_child]<self.heap_array[right_child] and self.heap_array[i] > self.heap_array[left_child]:#if the left is less than the right child switch the head with the left child
-               # print('TRUE')
+                print('TRUE')
                 #print(self.heap_array[(i*2)+1],'is about to switch with head ')
                 temp=self.heap_array[left_child]
                # print('temp is now ',temp)
@@ -65,8 +69,8 @@ class Heap:
 
 
 
-            elif  self.heap_array[left_child] > self.heap_array[right_child] and self.heap_array[i]>self.heap_array[right_child] and self.heap_array[right_child] <self.heap_array[left_child]:#if the right chilld is bigger than the left switch it with the head
-                #print('TRUE ASWELL')
+            elif  self.heap_array[left_child] > self.heap_array[right_child] and self.heap_array[i]>self.heap_array[right_child]:#if the right chilld is bigger than the left switch it with the head
+                print('TRUE ASWELL')
                 #print(self.heap_array[(i*2)+2], 'is about to switch with head ', head)
                 temp = self.heap_array[right_child]
                 #print('temp is now ', temp)
@@ -83,6 +87,10 @@ class Heap:
                 # print((i*2)+2)
                 # print(i)
                 i=right_child
+
+            else:
+                return minimum
+
         return minimum
 
 
@@ -116,18 +124,21 @@ sortedHeap=Heap()
 
 
 # newHeap.insert(2)
+# newHeap.insert(5)
 # newHeap.insert(0)
+# newHeap.insert(6)
 # newHeap.insert(1)
 # newHeap.insert(12)
 # newHeap.insert(10)
 # newHeap.insert(90)
 # newHeap.insert(21)
-# newHeap.insert(128)
 # newHeap.insert(34)
+# newHeap.insert(42)
+# newHeap.insert(128)
 # newHeap.print()
 #
 #
-# for i in range(9):
+# for i in range(11):
 #     min=newHeap.heap_sort()
 #     sortedHeap.add(min)
 #
@@ -153,3 +164,13 @@ with open(file1, 'r') as file:#reads file and inserts numbers into heap
         sortedHeap.add(min)
     print('The sorted heap is ')
     sortedHeap.print()
+
+
+
+
+
+
+
+
+
+
