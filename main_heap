@@ -173,4 +173,7 @@ with open(file1, 'r') as file:#reads file and inserts numbers into heap
 
 
 
-
+# There isnt much I would change to your code besides the basic layout of the user interface system and how it presents the information to
+#   user. This could also be how both the hardcoded and file solutions are used with one being commented out and could have 
+#   been written in seperate methods instead. Otherwise the code seems to be very effective and even the use of the heap_sort method
+#   simplifies the code and length of the program.
